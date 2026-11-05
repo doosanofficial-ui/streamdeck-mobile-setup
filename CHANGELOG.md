@@ -1,5 +1,12 @@
 # 변경 기록
 
+## 0.3.0
+
+- `main` push, pull request, 수동 실행용 GitHub Actions CI 추가
+- JavaScript 6개 구문 검사, JSON 2개 파싱, 기존 모의 테스트 43개 실행
+- 읽기 전용 권한, 고정된 공식 액션 SHA, 인증정보 비보관, 5분 제한 적용
+- 브라우저·실제 Mobile 시험과 CI 결과의 범위를 분리하여 문서화
+
 ## 0.2.0
 
 - 추가 플러그인이 없는 Website 5개와 Open 1개의 Mobile 설정 레시피 추가
