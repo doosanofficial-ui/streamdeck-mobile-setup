@@ -43,4 +43,19 @@ node --test
 
 ## CI
 
-`examples/ci-mock.yml.example`은 비활성 초안입니다. 이 파일이 있다는 이유로 GitHub Actions가 실행되거나 통과한 것은 아닙니다. 활성화하려면 검토 후 `.github/workflows/ci.yml`로 옮겨야 합니다.
+[활성 워크플로](../.github/workflows/ci.yml)는 `main` push, pull request, 수동 실행에서 다음을 검사합니다.
+
+- JavaScript 소스·테스트 파일 6개의 구문
+- `examples/buttons.example.json`, `profiles/mobile-starter.example.json` 파싱
+- `node --test`로 전체 43개 모의 테스트
+
+[GitHub Actions 실행 목록](https://github.com/doosanofficial-ui/streamdeck-mobile-setup/actions/workflows/ci.yml)에서 해당 커밋의 실행 결과를 확인합니다. 워크플로 파일이 있다는 것만으로 실행 성공을 뜻하지 않습니다. 브라우저 화면이나 실제 Mobile 장치 시험은 수행하지 않습니다.
+
+### 권한과 실행 범위
+
+- 표준 `ubuntu-latest` 러너 한 개, Node.js 24, 작업 제한 5분. 같은 브랜치의 새 실행은 진행 중인 이전 실행을 취소합니다.
+- GitHub 공식 checkout/setup-node 액션을 검토한 전체 커밋 SHA로 고정합니다. Node 설치·저장소 checkout에는 GitHub 또는 공식 배포 경로의 네트워크 접근이 필요할 수 있습니다.
+- `contents: read`만 허용하고 checkout 인증정보를 작업 공간에 남기지 않습니다. GitHub가 발급하는 일회성 작업 토큰 외에 사용자 시크릿·API 키는 요구하지 않습니다.
+- 추가 패키지 설치, 모델 호출, 캐시·아티팩트 업로드, 외부 서비스 전송, 배포, 실제 기기·회사 시스템 접속은 하지 않습니다. CI 로그는 이 공개 저장소에서 누구나 볼 수 있으므로 입력과 출력에 개인정보를 넣지 않습니다.
+- `pull_request_target`이나 자체 호스팅·유료 대형 러너를 사용하지 않습니다. 공개 저장소의 표준 러너만 사용하며 결제·사용량 설정은 변경하지 않습니다.
+- `examples/ci-mock.yml.example`은 참조용 사본입니다. 실제 실행은 `.github/workflows/ci.yml` 한 곳에서 관리합니다.
