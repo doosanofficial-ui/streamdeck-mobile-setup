@@ -4,7 +4,7 @@ Stream Deck Mobile의 버튼 구성, 설정 방법, 자동화 예시를 정리�
 
 ## 6버튼 데모
 
-**검증 상태:** 구문·설정·보안 검토와 자동 테스트 43개를 통과했습니다. 브라우저 화면 검증과 실제 Stream Deck Mobile 시험은 아직 완료하지 않았습니다. 데모는 미리보기 초안이며 CI도 비활성 초안입니다.
+**검증 상태:** 구문·설정·보안 검토와 자동 테스트 43개를 통과했습니다. 브라우저 화면 검증과 실제 Stream Deck Mobile 시험은 아직 완료하지 않았습니다. 데모는 미리보기 초안입니다. CI 실행 상태는 [GitHub Actions](https://github.com/doosanofficial-ui/streamdeck-mobile-setup/actions/workflows/ci.yml)에서 확인할 수 있습니다.
 
 [Mobile Setup Starter 설정 가이드](docs/mobile-setup.md)를 따라 기본 Website 5개와 Open 1개로 시험할 수 있습니다. 추가 플러그인이나 인증은 사용하지 않습니다.
 
@@ -21,7 +21,7 @@ Code → Download ZIP으로 내려받아 압축을 푼 뒤 `demo/index.html`을 
 - 기존 설정을 보존하며 변경하는 [설정 가이드](docs/setup.md)
 - 공개 전에 확인할 [보안·개인정보 체크리스트](docs/publishing-checklist.md)
 - 실제 작업을 실행하지 않는 VPN 상태 판정 모의 예시와 26개 테스트
-- 외부 서비스나 비밀값 없이 모의 테스트를 실행하는 GitHub Actions 초안
+- 사용자가 등록한 비밀값 없이 구문·JSON·모의 테스트를 실행하는 GitHub Actions CI
 
 이 저장소는 Elgato의 Stream Deck Mobile 앱, 공식 플러그인 또는 가져오기 가능한 프로필 패키지가 아닙니다. JSON 예시는 이 저장소의 설명용 형식이며 Stream Deck으로 직접 가져올 수 없습니다. 현재 장치 연결, 명령 실행, 웹 로그인, VPN 접속을 수행하는 구현은 포함하지 않습니다. 데모의 외부 문서 링크는 사용자가 별도로 눌렀을 때만 열립니다.
 
@@ -46,7 +46,7 @@ node --test
 
 전체 자동 테스트는 43개입니다. 이 중 VPN 모의 명세 26개는 합성 상태 값만 받아 판정 문자열을 반환합니다. `.invalid` 예약 도메인과 가짜 탭 ID를 사용하며, 모든 조건이 맞아도 `PLAN_ONLY_READY`만 반환합니다. 실제 Stream Deck 버튼, 브라우저, 인증, VPN의 동작을 검증하지 않습니다. 1초의 관측 유효기간도 예시 값입니다.
 
-[CI 초안](examples/ci-mock.yml.example)은 기본적으로 실행되지 않습니다. 검토 후 `.github/workflows/ci.yml`로 옮기면 수동 실행과 pull request에서 이 저장소의 모의 테스트만 실행하도록 구성되어 있습니다.
+[CI 워크플로](.github/workflows/ci.yml)는 `main` push, pull request, 수동 실행에서 구문 검사, JSON 두 개 파싱, 전체 모의 테스트를 실행합니다. 표준 Ubuntu 러너 한 개와 Node.js 24를 사용하며, 작업 제한은 5분입니다. 자세한 범위와 제한은 [검증 문서](docs/testing.md#ci)를 확인하세요. `examples/ci-mock.yml.example`은 참조용 사본이며 별도로 실행되지 않습니다.
 
 ## 변경 원칙
 
