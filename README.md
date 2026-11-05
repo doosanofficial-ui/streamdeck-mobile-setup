@@ -1,0 +1,48 @@
+# Stream Deck Mobile Setup
+
+Stream Deck Mobile의 버튼 구성, 설정 방법, 자동화 예시를 정리하고 계속 업데이트하기 위한 저장소입니다. 웹사이트 열기, 앱 실행, 작업 흐름 단축처럼 여러 용도로 확장할 수 있습니다. VPN은 가능한 예시 중 하나입니다.
+
+## 현재 제공하는 것
+
+- 버튼 구성을 설명하는 사람이 읽을 수 있는 JSON 예시
+- 기존 설정을 보존하며 변경하는 [설정 가이드](docs/setup.md)
+- 공개 전에 확인할 [보안·개인정보 체크리스트](docs/publishing-checklist.md)
+- 실제 작업을 실행하지 않는 VPN 상태 판정 모의 예시와 26개 테스트
+- 외부 서비스나 비밀값 없이 모의 테스트를 실행하는 GitHub Actions 초안
+
+이 저장소는 Elgato의 Stream Deck Mobile 앱, 공식 플러그인 또는 가져오기 가능한 프로필 패키지가 아닙니다. JSON 예시는 이 저장소의 설명용 형식이며 Stream Deck으로 직접 가져올 수 없습니다. 현재 장치 연결, 앱 실행, 웹 로그인, VPN 접속을 수행하는 구현은 포함하지 않습니다.
+
+## 시작하기
+
+1. [설정 가이드](docs/setup.md)를 읽습니다.
+2. [버튼 예시](examples/buttons.example.json)를 참고해 필요한 버튼을 고릅니다. 모든 예시는 비활성 상태이며 실제 설정은 개인 컴퓨터에서 따로 관리합니다.
+3. 기존 프로필을 비공개로 백업한 뒤 버튼 하나씩 적용하고 실제 동작을 확인합니다.
+4. 공유할 내용은 [공개 체크리스트](docs/publishing-checklist.md)에 따라 별도로 검토합니다.
+
+## 모의 테스트
+
+Node.js 24에서 외부 패키지 설치 없이 실행합니다.
+
+```sh
+node --check examples/vpn-plan-only/guard-contract.mjs
+node --check examples/vpn-plan-only/guard-contract.test.mjs
+node --test
+```
+
+모의 예시는 합성 상태 값만 받아 판정 문자열을 반환합니다. `.invalid` 예약 도메인과 가짜 탭 ID를 사용하며, 모든 조건이 맞아도 `PLAN_ONLY_READY`만 반환합니다. 실제 Stream Deck 버튼, 브라우저, 인증, VPN의 동작을 검증하지 않습니다. 1초의 관측 유효기간도 예시 값입니다.
+
+[CI 초안](examples/ci-mock.yml.example)은 기본적으로 실행되지 않습니다. 검토 후 `.github/workflows/ci.yml`로 옮기면 수동 실행과 pull request에서 이 저장소의 모의 테스트만 실행하도록 구성되어 있습니다.
+
+## 변경 원칙
+
+- 범용 설명과 합성 예시를 공개하고, 실제 환경별 값은 별도로 관리합니다.
+- 실기기에서 확인한 결과와 모의 테스트 결과를 구분합니다.
+- 회사 주소, 계정, 인증 정보, 실제 프로필, 개인 작업 기록을 넣지 않습니다.
+- 실제 동작이나 권한이 필요한 예시를 추가할 때는 영향과 복구 방법을 먼저 문서화합니다.
+
+이 프로젝트는 Elgato와 제휴하거나 공식 지원을 받는 프로젝트가 아닙니다.
+
+## 공식 자료
+
+- [Stream Deck Mobile 시작하기](https://help.elgato.com/hc/en-us/articles/16786832942221-Elgato-Stream-Deck-Mobile-2-0-Getting-Started)
+- [Stream Deck 플러그인 실행 구조](https://docs.elgato.com/streamdeck/sdk/introduction/plugin-environment/)
