@@ -1,0 +1,28 @@
+name: Example checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  mock-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check example syntax
+        run: |
+          node --check examples/vpn-plan-only/guard-contract.mjs
+          node --check examples/vpn-plan-only/guard-contract.test.mjs
+      - name: Parse documentation example
+        run: node -e 'JSON.parse(require("node:fs").readFileSync("examples/buttons.example.json", "utf8"))'
+      - name: Run mock tests
+        run: node --test

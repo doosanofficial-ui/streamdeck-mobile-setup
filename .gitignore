@@ -1,0 +1,19 @@
+# Keep personal configuration and raw exports outside the repository.
+.DS_Store
+node_modules/
+.env
+.env.*
+*.local.*
+private/
+local/
+backups/
+screenshots/
+*.streamDeckProfile
+*.streamDeckProfilesBackup
+*.log
+*.tap
+*.zip
+*.p12
+*.pfx
+*.pem
+*.key

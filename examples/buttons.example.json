@@ -1,0 +1,31 @@
+{
+  "format": "documentation-example-only",
+  "version": 1,
+  "nativeStreamDeckProfile": false,
+  "buttons": [
+    {
+      "id": "open-reference",
+      "title": "참고 문서",
+      "kind": "open-url",
+      "enabled": false,
+      "target": "https://docs.example.invalid/",
+      "notes": "예약 도메인 예시입니다. 실제 공개 문서 주소는 개인 설정에서 지정합니다."
+    },
+    {
+      "id": "open-local-app",
+      "title": "앱 열기",
+      "kind": "launch-app",
+      "enabled": false,
+      "target": "LOCAL_ONLY",
+      "notes": "실행 앱과 경로는 개인 환경에서 지정합니다. 이 파일은 어떤 앱도 실행하지 않습니다."
+    },
+    {
+      "id": "vpn-safety-example",
+      "title": "VPN 모의 예시",
+      "kind": "plan-only",
+      "enabled": false,
+      "target": "https://vpn.example.invalid/",
+      "notes": "합성 상태로 안전 조건만 판정합니다. 실제 네트워크나 인증에는 연결하지 않습니다."
+    }
+  ]
+}
