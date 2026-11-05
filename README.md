@@ -2,6 +2,19 @@
 
 Stream Deck Mobile의 버튼 구성, 설정 방법, 자동화 예시를 정리하고 계속 업데이트하기 위한 저장소입니다. 웹사이트 열기, 앱 실행, 작업 흐름 단축처럼 여러 용도로 확장할 수 있습니다. VPN은 가능한 예시 중 하나입니다.
 
+## 6버튼 데모
+
+**검증 상태:** 구문·설정·보안 검토와 자동 테스트 43개를 통과했습니다. 브라우저 화면 검증과 실제 Stream Deck Mobile 시험은 아직 완료하지 않았습니다. 데모는 미리보기 초안이며 CI도 비활성 초안입니다.
+
+[Mobile Setup Starter 설정 가이드](docs/mobile-setup.md)를 따라 기본 Website 5개와 Open 1개로 시험할 수 있습니다. 추가 플러그인이나 인증은 사용하지 않습니다.
+
+Code → Download ZIP으로 내려받아 압축을 푼 뒤 `demo/index.html`을 열면 6개 버튼의 설명, 선택 상태, 누름 횟수와 초기화를 미리 볼 수 있습니다. 이 화면은 **브라우저 미리보기이며 실제 Stream Deck 기기에 연결되지 않습니다.** GitHub의 HTML 소스 화면은 실행 가능한 웹 데모가 아닙니다.
+
+- [설정 레시피](profiles/mobile-starter.example.json): 설명용 JSON, 네이티브 프로필 가져오기용이 아님
+- [참고한 프로젝트와 라이선스](docs/references.md)
+- [실제 Mobile 시험 체크리스트](docs/testing.md)
+- [변경 기록](CHANGELOG.md)
+
 ## 현재 제공하는 것
 
 - 버튼 구성을 설명하는 사람이 읽을 수 있는 JSON 예시
@@ -10,7 +23,7 @@ Stream Deck Mobile의 버튼 구성, 설정 방법, 자동화 예시를 정리�
 - 실제 작업을 실행하지 않는 VPN 상태 판정 모의 예시와 26개 테스트
 - 외부 서비스나 비밀값 없이 모의 테스트를 실행하는 GitHub Actions 초안
 
-이 저장소는 Elgato의 Stream Deck Mobile 앱, 공식 플러그인 또는 가져오기 가능한 프로필 패키지가 아닙니다. JSON 예시는 이 저장소의 설명용 형식이며 Stream Deck으로 직접 가져올 수 없습니다. 현재 장치 연결, 앱 실행, 웹 로그인, VPN 접속을 수행하는 구현은 포함하지 않습니다.
+이 저장소는 Elgato의 Stream Deck Mobile 앱, 공식 플러그인 또는 가져오기 가능한 프로필 패키지가 아닙니다. JSON 예시는 이 저장소의 설명용 형식이며 Stream Deck으로 직접 가져올 수 없습니다. 현재 장치 연결, 명령 실행, 웹 로그인, VPN 접속을 수행하는 구현은 포함하지 않습니다. 데모의 외부 문서 링크는 사용자가 별도로 눌렀을 때만 열립니다.
 
 ## 시작하기
 
@@ -24,12 +37,14 @@ Stream Deck Mobile의 버튼 구성, 설정 방법, 자동화 예시를 정리�
 Node.js 24에서 외부 패키지 설치 없이 실행합니다.
 
 ```sh
+node --check demo/model.js
+node --check demo/app.js
 node --check examples/vpn-plan-only/guard-contract.mjs
 node --check examples/vpn-plan-only/guard-contract.test.mjs
 node --test
 ```
 
-모의 예시는 합성 상태 값만 받아 판정 문자열을 반환합니다. `.invalid` 예약 도메인과 가짜 탭 ID를 사용하며, 모든 조건이 맞아도 `PLAN_ONLY_READY`만 반환합니다. 실제 Stream Deck 버튼, 브라우저, 인증, VPN의 동작을 검증하지 않습니다. 1초의 관측 유효기간도 예시 값입니다.
+전체 자동 테스트는 43개입니다. 이 중 VPN 모의 명세 26개는 합성 상태 값만 받아 판정 문자열을 반환합니다. `.invalid` 예약 도메인과 가짜 탭 ID를 사용하며, 모든 조건이 맞아도 `PLAN_ONLY_READY`만 반환합니다. 실제 Stream Deck 버튼, 브라우저, 인증, VPN의 동작을 검증하지 않습니다. 1초의 관측 유효기간도 예시 값입니다.
 
 [CI 초안](examples/ci-mock.yml.example)은 기본적으로 실행되지 않습니다. 검토 후 `.github/workflows/ci.yml`로 옮기면 수동 실행과 pull request에서 이 저장소의 모의 테스트만 실행하도록 구성되어 있습니다.
 

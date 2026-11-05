@@ -1,0 +1,14 @@
+{
+  "format": "documentation-example-only",
+  "nativeStreamDeckProfile": false,
+  "name": "Mobile Setup Starter",
+  "backgroundGet": false,
+  "keys": [
+    {"slot": 1, "title": "저장소", "action": "System:Website", "url": "https://github.com/doosanofficial-ui/streamdeck-mobile-setup"},
+    {"slot": 2, "title": "설정 가이드", "action": "System:Website", "url": "https://github.com/doosanofficial-ui/streamdeck-mobile-setup/blob/main/docs/mobile-setup.md"},
+    {"slot": 3, "title": "참고 예제", "action": "System:Website", "url": "https://github.com/doosanofficial-ui/streamdeck-mobile-setup/blob/main/docs/references.md"},
+    {"slot": 4, "title": "시험 목록", "action": "System:Website", "url": "https://github.com/doosanofficial-ui/streamdeck-mobile-setup/blob/main/docs/testing.md"},
+    {"slot": 5, "title": "변경 기록", "action": "System:Website", "url": "https://github.com/doosanofficial-ui/streamdeck-mobile-setup/blob/main/CHANGELOG.md"},
+    {"slot": 6, "title": "로컬 데모", "action": "System:Open", "localFile": "REPOSITORY_DIRECTORY/demo/index.html"}
+  ]
+}

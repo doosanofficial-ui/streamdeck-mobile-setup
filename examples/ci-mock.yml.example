@@ -20,6 +20,8 @@ jobs:
           node-version: 24
       - name: Check example syntax
         run: |
+          node --check demo/model.js
+          node --check demo/app.js
           node --check examples/vpn-plan-only/guard-contract.mjs
           node --check examples/vpn-plan-only/guard-contract.test.mjs
       - name: Parse documentation example
